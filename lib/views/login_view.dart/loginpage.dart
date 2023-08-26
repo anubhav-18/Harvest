@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grocers/constants/colour.dart';
-import 'package:grocers/views/login_view.dart/otp_view.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,13 +17,12 @@ class _LoginPageState extends State<LoginPage> {
       body: SafeArea(
         child: Container(
           margin: const EdgeInsets.all(15),
-          // padding: EdgeInsets.all(8),
           child: Column(
             children: [
               Container(
                 alignment: Alignment.topRight,
                 child: TextButton(
-                  onPressed: () {} ,
+                  onPressed: () => Get.offNamed('/homePage') ,
                   child: const Text('Skip' , style: TextStyle(color: mainBckgrnd,fontSize: 18, fontWeight: FontWeight.bold),),
                 ),
               ),
@@ -58,9 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 50,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Get.to(const OTPScreen());
-                  }, 
+                  onPressed: () => Get.toNamed('/otpPage'), 
                   style: ElevatedButton.styleFrom(
                     backgroundColor: mainBckgrnd,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))

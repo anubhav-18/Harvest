@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocers/constants/colour.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,31 +13,77 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // centerTitle: true,
-        title: const Text('Grocers'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
+        automaticallyImplyLeading: false,
+        elevation: 0.0,
+        backgroundColor: mainBckgrnd,
+        toolbarHeight: 150,
+        flexibleSpace: SafeArea(
             child: Container(
-              margin: const EdgeInsets.all(5),
-              // color: Colors.red,
-              child: const Column(
+          margin: const EdgeInsets.only(top: 5, bottom: 0, left: 15, right: 15),
+          child: Column(
+            children: [
+              Row(
                 children: [
-                  Text('Welcome Back' ,style: TextStyle(fontSize: 16 , color: Colors.black),),
-                  Text('Greetings To All' ,style: TextStyle(fontSize: 16 , color: Colors.black),),
+                  const Text(
+                    'Harvest',
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: textIcons,
+                      fontFamily: 'ADLaMDisplay',
+                    ),
+                  ),
+                  const Spacer(),
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.account_circle_sharp,
+                        size: 35,
+                        color: textIcons,
+                      )),
                 ],
               ),
-            )
+              Align(
+                alignment: Alignment.topLeft,
+                child: SizedBox(
+                  height: 32,
+                  child: TextButton(
+                      onPressed: () {},
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.zero
+                      ),
+                      child: const Text(
+                        '+ Add an Address',
+                        style: TextStyle(
+                            color: textIcons,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                      )),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                height: 40,
+                child: TextFormField(
+                  textAlign: TextAlign.start,
+                  decoration: const InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      hintText: 'Search 10000+ Products',
+                      contentPadding: EdgeInsets.all(0),
+                      prefixIcon: Icon(
+                        Icons.search,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(color: Colors.white),
+                      )),
+                ),
+              )
+            ],
           ),
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.all(5),
-              color: Colors.green,
-            )
-          )
-        ],
+        )),
       ),
     );
   }

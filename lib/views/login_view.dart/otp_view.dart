@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grocers/constants/colour.dart';
-import 'package:grocers/views/home.dart';
-import 'package:grocers/views/login_view.dart/loginpage.dart';
 import 'package:pinput/pinput.dart';
 
 class OTPScreen extends StatefulWidget {
@@ -26,7 +24,7 @@ class _OTPScreenState extends State<OTPScreen> {
                 children: [
                   IconButton(
                     padding: const EdgeInsets.all(0),
-                    onPressed: () { Get.back();} , 
+                    onPressed: () => Get.back() , 
                     icon: const Icon(Icons.arrow_back_ios,
                     size: 18,
                     color: textIcons,
@@ -108,12 +106,7 @@ class _OTPScreenState extends State<OTPScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const LoginPage()));
-                        },
+                        onPressed: () => Get.back(),
                         child: const Text(
                           'Edit Phone Number ?',
                           style: TextStyle(
@@ -134,10 +127,7 @@ class _OTPScreenState extends State<OTPScreen> {
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
-                    
-                    onPressed: () {
-                      Get.to(const HomePage());
-                    },
+                    onPressed: () => Get.offNamed('/homePage'),
                     style: ElevatedButton.styleFrom(
                         backgroundColor: mainBckgrnd,
                         shape: RoundedRectangleBorder(
