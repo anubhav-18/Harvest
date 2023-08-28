@@ -14,6 +14,7 @@ class _ProfileDashState extends State<ProfileDash> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         elevation: 0,
         automaticallyImplyLeading: false,
         backgroundColor: mainBckgrnd,
@@ -25,28 +26,16 @@ class _ProfileDashState extends State<ProfileDash> {
             color: nuetralBck,
           ),
         ),
-        title: const Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'Harvest',
-            style: TextStyle(
-              fontSize: 22,
-              color: nuetralBck,
-              fontFamily: 'ADLaMDisplay',
-            ),
+        title: const Text(
+          'Harvest',
+          style: TextStyle(
+            fontSize: 22,
+            color: nuetralBck,
+            fontFamily: 'ADLaMDisplay',
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.logout,
-              size: 22,
-              color: nuetralBck,
-            ),
-          )
-        ],
       ),
+      
       body: Column(
         children: [
           const SizedBox(
@@ -180,7 +169,7 @@ class _ProfileDashState extends State<ProfileDash> {
             child: ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 8,
+                itemCount: iconList.length,
                 scrollDirection: Axis.vertical,
                 separatorBuilder: (context, index) {
                   return const Divider(
@@ -215,7 +204,6 @@ class _ProfileDashState extends State<ProfileDash> {
 }
 
 List<IconData> iconList = [
-  Icons.person_outline,
   Icons.shopping_bag_outlined,
   Icons.payment_outlined,
   Icons.delivery_dining_outlined,
@@ -223,10 +211,10 @@ List<IconData> iconList = [
   Icons.notifications_active_outlined,
   Icons.help_center_outlined,
   Icons.help_outline,
+  Icons.logout_outlined
 ];
 
 List<String> titleList = [
-  'Personal Information',
   'My Orders',
   'My Payments',
   'My Delivery Address',
@@ -234,4 +222,5 @@ List<String> titleList = [
   'Notifications',
   'Customer Service',
   'About',
+  'Logout'
 ];

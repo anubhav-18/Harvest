@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:grocers/views/Address_view/add_address.dart';
 import 'package:grocers/views/home_view/btm_nav.dart';
 import 'package:grocers/views/home_view/home.dart';
 import 'package:grocers/views/login_view/loginpage.dart';
@@ -48,7 +49,8 @@ class MyApp extends StatelessWidget {
           transitionDuration: const Duration(milliseconds: 100),
           curve: Curves.linear,
         ),
-        GetPage(name: '/btmNav', page: () => const BtmNavBar())
+        GetPage(name: '/btmNav', page: () => const BtmNavBar()),
+        GetPage(name: '/addAddress', page: () => const AddNewAddress()),
       ],
     );
   }
