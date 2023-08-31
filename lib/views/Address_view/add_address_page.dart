@@ -54,7 +54,7 @@ class AddNewAddress extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      Get.toNamed('/btmNav');
+                      Get.back();
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: nuetralBck,

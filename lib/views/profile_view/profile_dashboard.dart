@@ -35,7 +35,6 @@ class _ProfileDashState extends State<ProfileDash> {
           ),
         ),
       ),
-      
       body: Column(
         children: [
           const SizedBox(
@@ -98,6 +97,7 @@ class _ProfileDashState extends State<ProfileDash> {
                     top: 10,
                     right: 10,
                     child: GestureDetector(
+                      onTap: () {},
                       child: const Icon(
                         Icons.edit_outlined,
                         color: nuetralBck,
@@ -146,7 +146,7 @@ class _ProfileDashState extends State<ProfileDash> {
                               bottom: 5,
                               right: 20,
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () => Get.toNamed('/savedAddress'),
                                 style: TextButton.styleFrom(
                                   side: const BorderSide(width: 1 ,color: accentColor)
                                 ),
@@ -178,6 +178,7 @@ class _ProfileDashState extends State<ProfileDash> {
                 },
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
+                    onTap: () { onTapList[index](); }, 
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: nuetralBck,
@@ -206,9 +207,9 @@ class _ProfileDashState extends State<ProfileDash> {
 List<IconData> iconList = [
   Icons.shopping_bag_outlined,
   Icons.payment_outlined,
-  Icons.delivery_dining_outlined,
   Icons.rate_review_outlined,
   Icons.notifications_active_outlined,
+  Icons.delivery_dining_outlined,
   Icons.help_center_outlined,
   Icons.help_outline,
   Icons.logout_outlined
@@ -217,10 +218,33 @@ List<IconData> iconList = [
 List<String> titleList = [
   'My Orders',
   'My Payments',
-  'My Delivery Address',
   'Ratings & Reviews',
   'Notifications',
+  'My Delivery Address',
   'Customer Service',
   'About',
   'Logout'
+];
+
+List<Function> onTapList = [
+  //My Orders
+  () {
+    Get.toNamed('loginPage');
+  },
+  //My Payemnts
+  () {},
+  //Ratings & Reviews
+  () {},
+  //Notifications
+  () {},
+  //My Delivery Address
+  () {
+    Get.toNamed('/savedAddress');
+  },
+  //Customer Service
+  () {},
+  //About
+  () {},
+  //Logout
+  () {},
 ];
