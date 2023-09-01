@@ -6,6 +6,7 @@ import 'package:grocers/views/home_view/BtmNav/btm_nav.dart';
 import 'package:grocers/views/home_view/home.dart';
 import 'package:grocers/views/login_view/loginpage.dart';
 import 'package:grocers/views/login_view/otp_view.dart';
+import 'package:grocers/views/order_view/orderPage.dart';
 import 'package:grocers/views/profile_view/profile_dashboard.dart';
 import 'package:grocers/views/splashscreen_view/splashscreen.dart';
 import 'package:grocers/views/wishList_view/wishList.dart';
@@ -33,9 +34,9 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/loginPage',
           page: () => const LoginPage(),
-          // transition: Transition.rightToLeftWithFade,
-          // transitionDuration: const Duration(milliseconds: 500),
-          // curve: Curves.linear,
+          transition: Transition.rightToLeftWithFade,
+          transitionDuration: const Duration(milliseconds: 500),
+          curve: Curves.linear,
         ),
         GetPage(
           name: '/otpPage',
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/addAddress', page: () => const AddNewAddress()),
         GetPage(name: '/savedAddress', page: () => const SavedAddress()),
         GetPage(name: '/wishlistPage', page: () => const WishList()),
+        GetPage(name: '/orderPage', page: () => const MyOrders()),
       ],
     );
   }

@@ -178,7 +178,12 @@ class _ProfileDashState extends State<ProfileDash> {
                 },
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    onTap: () { onTapList[index](); }, 
+                    onTap: () {
+                      Get.toNamed(onTapList[index]);
+                      setState(() {
+                        
+                      });
+                    }, 
                     leading: CircleAvatar(
                       radius: 20,
                       backgroundColor: nuetralBck,
@@ -226,25 +231,21 @@ List<String> titleList = [
   'Logout'
 ];
 
-List<Function> onTapList = [
+List<String> onTapList = [
   //My Orders
-  () {
-    Get.toNamed('loginPage');
-  },
+  'orderPage',
   //My Payemnts
-  () {},
+  '',
   //Ratings & Reviews
-  () {},
+  '',
   //Notifications
-  () {},
+  '',
   //My Delivery Address
-  () {
-    Get.toNamed('/savedAddress');
-  },
+  'savedAddress',
   //Customer Service
-  () {},
+  '',
   //About
-  () {},
+  '',
   //Logout
-  () {},
+  '',
 ];

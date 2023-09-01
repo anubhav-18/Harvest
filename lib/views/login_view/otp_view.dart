@@ -42,7 +42,6 @@ class _OTPScreenState extends State<OTPScreen> {
                   )
                 ],
               ),
-              
               const SizedBox(
                 height: 20,
               ),
@@ -93,6 +92,7 @@ class _OTPScreenState extends State<OTPScreen> {
               Padding(
                 padding: const EdgeInsets.only(left:10 , right: 10 , bottom: 10),
                 child: Pinput(
+                  autofocus: true,
                   controller: phonecontroller,
                   length: 6,
                 ),

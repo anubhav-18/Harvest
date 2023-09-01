@@ -18,6 +18,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Container(
           margin: const EdgeInsets.all(15),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 alignment: Alignment.topRight,
@@ -27,28 +28,22 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 15,),
-              const Row(
-                children: [
-                  Text('Sign in', style: TextStyle(fontSize: 36 , fontFamily: 'ADLaMDisplay', color: textIcons , fontWeight: FontWeight.w700)),
-                ],
-                ),
-              const Row(
-                children: [
-                  Text('To Harvest',style: TextStyle(fontSize: 36 ,fontFamily: 'ADLaMDisplay', color: textIcons , fontWeight: FontWeight.w700)),
-                ],
-              ),
-              const Row(
-                children: [
-                  Text('to access your Addressess, Order & Wishlist.',style: TextStyle(fontSize: 17 , color: textIcons , fontWeight: FontWeight.w700)),
-                ],
-              ),
-              const SizedBox(height: 70,),
-              TextFormField(
-                controller: phoneController,
-                keyboardType: TextInputType.phone,
-                decoration: const InputDecoration(
-                  hintText: 'Enter Your Phone Number',
-                  hintStyle: TextStyle(fontWeight: FontWeight.bold)
+              const Text('Sign in', style: TextStyle(fontSize: 36 , fontFamily: 'ADLaMDisplay', color: textIcons , fontWeight: FontWeight.w700)),
+              const Text('To Harvest',style: TextStyle(fontSize: 36 ,fontFamily: 'ADLaMDisplay', color: textIcons , fontWeight: FontWeight.w700)),
+              const Text('to access your Addressess, Order & Wishlist.',style: TextStyle(fontSize: 17 , color: textIcons , fontWeight: FontWeight.w700)),
+              const SizedBox(height: 100,),
+              Expanded(
+                child: TextFormField(
+                  controller: phoneController,
+                  keyboardType: TextInputType.phone,
+                  decoration: const InputDecoration(
+                    prefixIcon: Text('+91 - ', style: TextStyle(fontSize: 19 ,fontFamily: 'ADLaMDisplay', color: textIcons , )),
+                    prefixIconConstraints: BoxConstraints(minHeight: 0,minWidth: 0),
+                    // prefix: Text('+91 -',style: TextStyle(fontSize: 18 , color: Colors.black)),
+                    hintText: 'Enter your Phone Number',
+                    hintStyle: TextStyle(fontFamily: 'ADLaMDisplay')
+                  ),
+                  
                 ),
               ),
               const Spacer(),
