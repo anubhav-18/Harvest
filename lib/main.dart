@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:grocers/views/Address_view/add_address_page.dart';
+import 'package:grocers/views/Address_view/add_new_address.dart';
 import 'package:grocers/views/Address_view/saved_address.dart';
 import 'package:grocers/views/home_view/BtmNav/btm_nav.dart';
 import 'package:grocers/views/home_view/home.dart';
 import 'package:grocers/views/login_view/loginpage.dart';
 import 'package:grocers/views/login_view/otp_view.dart';
 import 'package:grocers/views/order_view/orderPage.dart';
+import 'package:grocers/views/profile_view/edit_profile.dart';
 import 'package:grocers/views/profile_view/profile_dashboard.dart';
 import 'package:grocers/views/splashscreen_view/splashscreen.dart';
 import 'package:grocers/views/wishList_view/wishList.dart';
@@ -52,11 +53,18 @@ class MyApp extends StatelessWidget {
           transitionDuration: const Duration(milliseconds: 500),
           curve: Curves.linear,
         ),
+        GetPage(
+          name: '/editProfile', 
+          page: () => const EditProfile(),
+          transition: Transition.rightToLeft,
+          transitionDuration: const Duration(milliseconds: 500),
+          curve: Curves.linear,
+        ),
         GetPage(name: '/btmNav', page: () => const BtmNavBar()),
         GetPage(name: '/addAddress', page: () => const AddNewAddress()),
         GetPage(name: '/savedAddress', page: () => const SavedAddress()),
         GetPage(name: '/wishlistPage', page: () => const WishList()),
-        GetPage(name: '/orderPage', page: () => const MyOrders()),
+        GetPage(name: '/orderPage', page: () => const MyOrders()),  
       ],
     );
   }

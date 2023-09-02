@@ -97,7 +97,7 @@ class _ProfileDashState extends State<ProfileDash> {
                     top: 10,
                     right: 10,
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () => Get.toNamed('/editProfile'),
                       child: const Icon(
                         Icons.edit_outlined,
                         color: nuetralBck,

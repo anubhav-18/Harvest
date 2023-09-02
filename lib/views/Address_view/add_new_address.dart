@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grocers/constants/colour.dart';
+import 'package:grocers/views/profile_view/ReuseWidgets/customTextField.dart';
 
 class AddNewAddress extends StatelessWidget {
   const AddNewAddress({super.key});
@@ -33,21 +34,42 @@ class AddNewAddress extends StatelessWidget {
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.all(15),
+        margin: const EdgeInsets.all(20),
         child: GestureDetector(
           onTap: () {
             FocusScope.of(context).unfocus();
           },
           child: ListView(
             children: [
-              const SizedBox(height: 30),
-              buildTextField("Receiver's Name", "", false),
-              buildTextField("Address Line 1", "", false),
-              buildTextField("Address Line 2", "", false),
-              buildTextField("Landmark", "", false),
-              buildTextField("Pincode", "", false),
-              buildTextField("City", "", false),
-              buildTextField("State", "", false),
+              const SizedBox(height: 20),
+              const ReuseTextField(
+                  labelText: "Receiver's Name",
+                  placeholder: "",
+                  isPasswordTextField: false),
+              const ReuseTextField(
+                  labelText: "Address Line 1",
+                  placeholder: "",
+                  isPasswordTextField: false),
+              const ReuseTextField(
+                  labelText: "Address Line 2",
+                  placeholder: "",
+                  isPasswordTextField: false),
+              const ReuseTextField(
+                  labelText: "Landmark",
+                  placeholder: "",
+                  isPasswordTextField: false),
+              const ReuseTextField(
+                  labelText: "Pincode",
+                  placeholder: "",
+                  isPasswordTextField: false),
+              const ReuseTextField(
+                  labelText: "City",
+                  placeholder: "",
+                  isPasswordTextField: false),
+              const ReuseTextField(
+                  labelText: "State",
+                  placeholder: "",
+                  isPasswordTextField: false),
               const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -100,28 +122,28 @@ class AddNewAddress extends StatelessWidget {
   }
 }
 
-Widget buildTextField(
-    String labelText, String placeholder, bool isPasswordTextField) {
-  return Padding(
-    padding: const EdgeInsets.only(bottom: 30),
-    child: TextFormField(
-      decoration: InputDecoration(
-          suffixIcon: isPasswordTextField
-              ? IconButton(
-                  icon: const Icon(Icons.remove_red_eye, color: Colors.grey),
-                  onPressed: () {})
-              : null,
-          contentPadding: const EdgeInsets.only(bottom: 5),
-          labelText: labelText,
-          labelStyle: const TextStyle(
-              color: textIcons, fontWeight: FontWeight.bold, fontSize: 21),
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          hintText: placeholder,
-          hintStyle: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.grey,
-          )),
-    ),
-  );
-}
+// Widget buildTextField(
+//     String labelText, String placeholder, bool isPasswordTextField) {
+//   return Padding(
+//     padding: const EdgeInsets.only(bottom: 30),
+//     child: TextFormField(
+//       decoration: InputDecoration(
+//           suffixIcon: isPasswordTextField
+//               ? IconButton(
+//                   icon: const Icon(Icons.remove_red_eye, color: Colors.grey),
+//                   onPressed: () {})
+//               : null,
+//           contentPadding: const EdgeInsets.only(bottom: 5),
+//           labelText: labelText,
+//           labelStyle: const TextStyle(
+//               color: textIcons, fontWeight: FontWeight.bold, fontSize: 21),
+//           floatingLabelBehavior: FloatingLabelBehavior.always,
+//           hintText: placeholder,
+//           hintStyle: const TextStyle(
+//             fontSize: 18,
+//             fontWeight: FontWeight.bold,
+//             color: Colors.grey,
+//           )),
+//     ),
+//   );
+// }

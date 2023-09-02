@@ -99,7 +99,7 @@ class _SavedAddressState extends State<SavedAddress> {
                                     text: TextSpan(
                                       text: fullAddress[index],
                                       style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
+                                        // fontWeight: FontWeight.bold,
                                         fontSize: 12,
                                         color: textIcons,
                                       ),
@@ -112,7 +112,8 @@ class _SavedAddressState extends State<SavedAddress> {
                           ),
                           Text( ('Phone: ${phoneAddress[index]}'),
                             style: const TextStyle(
-                              fontFamily: 'ADLaMDisplay',
+                              // fontFamily: 'ADLaMDisplay',
+                              fontWeight: FontWeight.bold,
                               fontSize: 12,
                               color: textIcons,
                             ),
@@ -165,6 +166,7 @@ class _SavedAddressState extends State<SavedAddress> {
           ),
         ),
       ),
+    
     );
   } 
 }
