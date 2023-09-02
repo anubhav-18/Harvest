@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grocers/constants/colour.dart';
 import 'package:grocers/views/profile_view/ReuseWidgets/customTextField.dart';
-import 'package:intl/intl.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -23,7 +22,6 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
