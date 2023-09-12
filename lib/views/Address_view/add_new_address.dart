@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grocers/constants/colour.dart';
-import 'package:grocers/views/profile_view/ReuseWidgets/customTextField.dart';
+import 'package:grocers/views/ReuseWidgets/customTextField.dart';
 
 class AddNewAddress extends StatelessWidget {
   const AddNewAddress({super.key});

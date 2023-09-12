@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:grocers/constants/colour.dart';
+import 'package:grocers/views/cart_view/cart_page.dart';
 import 'package:grocers/views/home_view/home.dart';
 import 'package:grocers/views/order_view/orderPage.dart';
 import 'package:grocers/views/wishList_view/wishList.dart';
@@ -13,7 +15,6 @@ class BtmNavBar extends StatefulWidget {
 }
 
 class _BtmNavBarState extends State<BtmNavBar> {
-
   // final PageController _pageController = PageController();
   // void initState() {
   //   super.initState();
@@ -23,56 +24,54 @@ class _BtmNavBarState extends State<BtmNavBar> {
   int _btmnavindex = 0;
 
   void _onItemTapped(int index) {
-    setState(() {
-      _btmnavindex = index;
-    });
+    if (index != 3) {
+      setState(() {
+        _btmnavindex = index;
+      });
+      
+      print(index);
+    } else {
+      Get.toNamed('/cartPage');
+    }
 
-    print(index);
+    
   }
 
-  // Widget pageCaller(int index) {
-  //   switch (index) {
-  //     case 0:
-  //       {
-  //         return const HomePage();
+  Widget pageCaller(int index) {
+    switch (index) {
+      case 0:
+        {
+          return const HomePage();
+        }
+      case 1:
+        {
+          return const WishList();
+        }
+      case 2:
+        {
+          return const MyOrders();
+        }
+    }
+    return Container(
+      color: Colors.red,
+    );
+  }
 
-  //       }
-  //     case 1:
-  //       {
-  //         return const WishList();
-  //       }
-  //     case 2:
-  //       {
-  //         return const MyOrders();
-  //       }
-  //     case 3:
-  //       {
-  //         return Container(
-  //           color: Colors.blue,
-  //         );
-  //       }
-  //   }
-  //   return Container(
-  //     color: Colors.red,
-  //   );
-  // }
-
-  final List<Widget> screenList = [
-    const HomePage(),
-    const WishList(),
-    const MyOrders(),
-    Container(
-      color: Colors.green,
-    ),
-  ];
+  // final List<Widget> screenList = [
+  //   const HomePage(),
+  //   const WishList(),
+  //   const MyOrders(),
+  //   const CartPage(),
+  // ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _btmnavindex,
-        children: screenList,
-      ),
+      body: Center(child: pageCaller(_btmnavindex)),
+      // IndexedStack(
+      //   index: _btmnavindex,
+      //   children: screenList,
+      // ),
       // screenList.elementAt(_btmnavindex),
       bottomNavigationBar: BottomNavigationBar(
           landscapeLayout: BottomNavigationBarLandscapeLayout.spread,

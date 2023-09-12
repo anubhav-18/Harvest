@@ -140,6 +140,7 @@ class _MyOrdersState extends State<MyOrders> {
           IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart)),
         ],
       ),
+      
       body: Container(
         margin: const EdgeInsets.all(15),
         child: Column(
@@ -195,6 +196,7 @@ class _MyOrdersState extends State<MyOrders> {
             )
           
           ],
+        
         ),
       ),
     );

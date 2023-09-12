@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 alignment: Alignment.topRight,
                 child: TextButton(
-                  onPressed: () => Get.offNamed('/btmNav') ,
+                  onPressed: () => Get.toNamed('/btmNav') ,
                   child: const Text('Skip' , style: TextStyle(color: mainBckgrnd,fontSize: 18, fontWeight: FontWeight.bold),),
                 ),
               ),

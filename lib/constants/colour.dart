@@ -12,4 +12,6 @@ const darkBlue = Color(0xff00003f);
 const greyclr = Colors.grey;
 const yellowclr = Colors.yellow;
 const redclr = Colors.red ; 
+const lightBlue = Color(0xffb3cee5);
+const whiteclr = Colors.white;
 

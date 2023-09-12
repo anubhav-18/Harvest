@@ -127,7 +127,7 @@ class _OTPScreenState extends State<OTPScreen> {
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () => Get.offNamed('/btmNav'),
+                    onPressed: () => Get.offAllNamed('/btmNav'),
                     style: ElevatedButton.styleFrom(
                         backgroundColor: mainBckgrnd,
                         shape: RoundedRectangleBorder(
