@@ -37,7 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   pinput: ^2.2.31
-  dropdown_button2: ^2.3.9
+  firebase_core: ^2.15.1
+  firebase_auth: ^4.9.0
 
 dev_dependencies:
   flutter_test:

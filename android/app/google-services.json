@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "806313131951",
+    "project_id": "harvest-2d275",
+    "storage_bucket": "harvest-2d275.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806313131951:android:e6e9d0d8d944442e88795a",
+        "android_client_info": {
+          "package_name": "com.example.grocers"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATmZeY1LjVAFx5p4yVHnDMSi9GkcRyK50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
