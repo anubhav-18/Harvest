@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:grocers/src/constants/colour.dart';
 
 class WishList extends StatelessWidget {
@@ -13,7 +12,7 @@ class WishList extends StatelessWidget {
         backgroundColor: mainBckgrnd,
         automaticallyImplyLeading: false,
         leading: GestureDetector(
-            onTap: () => Get.back(),
+            onTap: () => Navigator.of(context).pop(),
             child: const Icon(
               Icons.arrow_back_ios,
               size: 22,

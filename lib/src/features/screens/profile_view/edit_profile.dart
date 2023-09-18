@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:grocers/src/constants/colour.dart';
 import 'package:grocers/src/common_widgets/customTextField.dart';
+
+import '../../models/user_model.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -12,12 +14,33 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   late DateTime pickedDate = DateTime.now();
 
   // void initState() {
   //   super.initState();
   //   pickedDate = _pickDate() ;
   // }
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
+
+  Future<void> storeUserData(String id) async {
+      String firstDisplayName = firstNameController.text.trim();
+      String lastDisplayName = lastNameController.text.trim();
+      String emailDisplayName = emailController.text.trim();
+
+      UserModel userModel = UserModel(
+          uid: id,
+          firstName: firstDisplayName,
+          lastName: lastDisplayName,
+          email: emailDisplayName,
+          phoneNo: '',
+          createdAt: '');
+
+      await db.collection('users').doc(id).set(userModel.toMap());
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +51,7 @@ class _EditProfileState extends State<EditProfile> {
         automaticallyImplyLeading: false,
         backgroundColor: mainBckgrnd,
         leading: GestureDetector(
-          onTap: () => Get.back(),
+          onTap: () => Navigator.of(context).pop(),
           child: const Icon(
             Icons.arrow_back_ios,
             size: 22,
@@ -53,15 +76,18 @@ class _EditProfileState extends State<EditProfile> {
             child: ListView(
               children: [
                 const SizedBox(height: 20),
-                const ReuseTextField(
+                ReuseTextField(
+                    controller: firstNameController,
                     labelText: "First Name",
                     placeholder: "",
                     isPasswordTextField: false),
-                const ReuseTextField(
+                ReuseTextField(
+                    controller: lastNameController,
                     labelText: "Last Name",
                     placeholder: "",
                     isPasswordTextField: false),
-                const ReuseTextField(
+                ReuseTextField(
+                    controller: emailController,
                     labelText: "Email",
                     placeholder: "",
                     isPasswordTextField: false),
@@ -126,14 +152,18 @@ class _EditProfileState extends State<EditProfile> {
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: GestureDetector(
-              onTap: () => Get.toNamed('/addAddress'),
+              onTap: () {
+                // FirebaseAuth auth = FirebaseAuth.instance ; 
+                // User? user = auth.currentUser! ; 
+                Navigator.of(context).pop();
+              },
               child: Container(
                 decoration: const BoxDecoration(
                   color: mainBckgrnd,
                   borderRadius: BorderRadius.all(Radius.circular(25)),
                   // border: Border.all(color: blackclr.withOpacity(0.5))
                 ),
-                height: height*0.06,
+                height: height * 0.06,
                 width: double.infinity,
                 child: const Align(
                   alignment: Alignment.center,

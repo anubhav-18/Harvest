@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:grocers/src/constants/colour.dart';
 
 class SavedAddress extends StatefulWidget {
@@ -30,7 +29,7 @@ class _SavedAddressState extends State<SavedAddress> {
             size: 22,
             color: nuetralBck,
           ),
-          onPressed: () => Get.back(),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       body: Container(
@@ -137,7 +136,8 @@ class _SavedAddressState extends State<SavedAddress> {
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: GestureDetector(
-              onTap: () => Get.toNamed('/addAddress'),
+              onTap: () => Navigator.pushNamed(context,'/addAddress'),
+              // Get.toNamed('/addAddress'),
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(25)),

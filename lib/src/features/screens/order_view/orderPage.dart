@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:grocers/src/constants/colour.dart';
 
 // class MyOrders extends StatefulWidget {
@@ -121,7 +120,7 @@ class _MyOrdersState extends State<MyOrders> {
         backgroundColor: mainBckgrnd,
         automaticallyImplyLeading: false,
         leading: GestureDetector(
-            onTap: () => Get.back(),
+            onTap: () => Navigator.of(context).pop(),
             child: const Icon(
               Icons.arrow_back_ios,
               size: 22,

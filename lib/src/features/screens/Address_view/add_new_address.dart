@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:grocers/src/constants/colour.dart';
 import 'package:grocers/src/common_widgets/customTextField.dart';
 
@@ -8,6 +7,13 @@ class AddNewAddress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController recivernameController = TextEditingController();
+    TextEditingController addressline1Controller = TextEditingController();
+    TextEditingController addressline2Controller = TextEditingController();
+    TextEditingController cityController = TextEditingController();
+    TextEditingController stateController = TextEditingController();
+    TextEditingController landmarkController = TextEditingController();
+    TextEditingController pincodeController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -16,7 +22,7 @@ class AddNewAddress extends StatelessWidget {
         backgroundColor: mainBckgrnd,
         leading: GestureDetector(
           onTap: () {
-            Get.back();
+            Navigator.pop(context);
           },
           child: const Icon(
             Icons.arrow_back_ios,
@@ -42,31 +48,38 @@ class AddNewAddress extends StatelessWidget {
           child: ListView(
             children: [
               const SizedBox(height: 20),
-              const ReuseTextField(
+              ReuseTextField(
+                controller: recivernameController,
                   labelText: "Receiver's Name",
                   placeholder: "",
                   isPasswordTextField: false),
-              const ReuseTextField(
+              ReuseTextField(
+                controller: addressline1Controller,
                   labelText: "Address Line 1",
                   placeholder: "",
                   isPasswordTextField: false),
-              const ReuseTextField(
+              ReuseTextField(
+                controller: addressline2Controller,
                   labelText: "Address Line 2",
                   placeholder: "",
                   isPasswordTextField: false),
-              const ReuseTextField(
+              ReuseTextField(
+                controller: landmarkController,
                   labelText: "Landmark",
                   placeholder: "",
                   isPasswordTextField: false),
-              const ReuseTextField(
+              ReuseTextField(
+                controller: pincodeController,
                   labelText: "Pincode",
                   placeholder: "",
                   isPasswordTextField: false),
-              const ReuseTextField(
+              ReuseTextField(
+                controller: cityController,
                   labelText: "City",
                   placeholder: "",
                   isPasswordTextField: false),
-              const ReuseTextField(
+              ReuseTextField(
+                controller: stateController,
                   labelText: "State",
                   placeholder: "",
                   isPasswordTextField: false),
@@ -76,7 +89,7 @@ class AddNewAddress extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      Get.back();
+                      Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: nuetralBck,
@@ -97,7 +110,8 @@ class AddNewAddress extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Get.toNamed('/btmNav');
+                      Navigator.pushNamed(context, '/btmNav');
+                      // Get.toNamed('/btmNav');
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: mainBckgrnd,

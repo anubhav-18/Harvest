@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:grocers/src/constants/colour.dart';
 import 'package:grocers/src/constants/defaultPadding.dart';
 
@@ -136,7 +135,7 @@ class _CartPageState extends State<CartPage> {
         backgroundColor: mainBckgrnd,
         automaticallyImplyLeading: false,
         leading: GestureDetector(
-            onTap: () => Get.back(),
+            onTap: () => Navigator.pop(context),
             child: const Icon(
               Icons.arrow_back_ios,
               size: 22,

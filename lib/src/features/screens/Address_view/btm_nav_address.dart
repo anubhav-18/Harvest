@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:grocers/src/constants/colour.dart';
 
 class BtmNavAddress extends StatelessWidget {
@@ -35,7 +34,7 @@ class BtmNavAddress extends StatelessWidget {
                         ),
                         const Spacer(),
                         IconButton(
-                            onPressed: () => Get.back(),
+                            onPressed: () => Navigator.pop(context),
                             icon: const Icon(
                               Icons.close,
                               size: 25,
@@ -103,7 +102,8 @@ class BtmNavAddress extends StatelessWidget {
                                     backgroundColor: Colors.white,
                                     radius: 29,
                                     child: GestureDetector(
-                                      onTap: () => Get.toNamed('/addAddress'),
+                                      onTap: () => Navigator.pushNamed(context, '/addAddress'),
+                                      // Get.toNamed('/addAddress'),
                                       child: const Icon(
                                         Icons.add,
                                         color: mainBckgrnd,
@@ -130,7 +130,7 @@ class BtmNavAddress extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 10),
                       child: InkWell(
                         onTap: () {
-                          Get.back();
+                          Navigator.pop(context);
                           pinCodeBtmModal(context, height);
                         },
                         // Enter a Pincode
@@ -168,7 +168,7 @@ class BtmNavAddress extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 6),
                             child: TextButton(
-                              onPressed: () => Get.back(),
+                              onPressed: () => Navigator.pop(context),
                               child: const Text(
                                 'Detect my location',
                                 style: TextStyle(
@@ -224,7 +224,7 @@ Future<dynamic> pinCodeBtmModal(BuildContext context, double height) {
                       )),
                   const Spacer(),
                   GestureDetector(
-                      onTap: () => Get.back(),
+                      onTap: () => Navigator.pop(context),
                       child: const Icon(
                         Icons.close,
                         size: 25,

@@ -5,8 +5,10 @@ class ReuseTextField extends StatelessWidget {
   final String labelText;
   final String placeholder;
   final bool isPasswordTextField;
+  final TextEditingController controller ; 
   const ReuseTextField(
       {super.key,
+      required this.controller , 
       required this.labelText,
       required this.placeholder,
       required this.isPasswordTextField});
@@ -16,6 +18,7 @@ class ReuseTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
       child: TextFormField(
+        controller: controller,
         decoration: InputDecoration(
             enabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(

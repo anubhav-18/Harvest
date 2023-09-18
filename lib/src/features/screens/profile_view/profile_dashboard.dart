@@ -1,9 +1,7 @@
-import 'dart:async';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:grocers/src/constants/colour.dart';
+import 'package:grocers/src/provider/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProfileDash extends StatefulWidget {
   const ProfileDash({super.key});
@@ -15,6 +13,49 @@ class ProfileDash extends StatefulWidget {
 class _ProfileDashState extends State<ProfileDash> {
   @override
   Widget build(BuildContext context) {
+    final ap = Provider.of<AuthProvider>(context, listen: false);
+    List<Function()?> onTapList = [
+      //My Orders
+      () {},
+      //My Payemnts
+      () {},
+      //Ratings & Reviews
+      () {},
+      //Notifications
+      () {},
+      //My Delivery Address
+      () {},
+      //Customer Service
+      () {},
+      //About
+      () {},
+      //Logout
+      () => ap.signOut().then((value) => Navigator.of(context)
+          .pushNamedAndRemoveUntil('/loginPage', (route) => false)),
+    ];
+
+    List<IconData> iconList = [
+      Icons.shopping_bag_outlined,
+      Icons.payment_outlined,
+      Icons.rate_review_outlined,
+      Icons.notifications_active_outlined,
+      Icons.delivery_dining_outlined,
+      Icons.help_center_outlined,
+      Icons.help_outline,
+      Icons.logout_outlined
+    ];
+
+    List<String> titleList = [
+      'My Orders',
+      'My Payments',
+      'Ratings & Reviews',
+      'Notifications',
+      'My Delivery Address',
+      'Customer Service',
+      'About',
+      'Logout'
+    ];
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -22,7 +63,7 @@ class _ProfileDashState extends State<ProfileDash> {
         automaticallyImplyLeading: false,
         backgroundColor: mainBckgrnd,
         leading: GestureDetector(
-          onTap: () => Get.back(),
+          onTap: () => Navigator.of(context).pop(),
           child: const Icon(
             Icons.arrow_back_ios,
             size: 22,
@@ -63,34 +104,34 @@ class _ProfileDashState extends State<ProfileDash> {
                       size: 85,
                       color: nuetralBck,
                     )),
-                const Positioned(
+                Positioned(
                     top: 10,
                     left: 100,
                     child: Text(
-                      'Anubhav Bindal',
-                      style: TextStyle(
+                      ap.userModel.firstName,
+                      style: const TextStyle(
                         fontSize: 20,
                         color: nuetralBck,
                         fontFamily: 'ADLaMDisplay',
                       ),
                     )),
-                const Positioned(
+                Positioned(
                     top: 35,
                     left: 100,
                     child: Text(
-                      'anubhavbindal16@gmail.com',
-                      style: TextStyle(
+                      ap.userModel.email,
+                      style: const TextStyle(
                         fontSize: 17,
                         color: nuetralBck,
                         fontWeight: FontWeight.bold,
                       ),
                     )),
-                const Positioned(
+                Positioned(
                     top: 60,
                     left: 100,
                     child: Text(
-                      '1234567891',
-                      style: TextStyle(
+                      ap.userModel.phoneNo,
+                      style: const TextStyle(
                         fontSize: 17,
                         color: nuetralBck,
                         fontWeight: FontWeight.bold,
@@ -100,7 +141,9 @@ class _ProfileDashState extends State<ProfileDash> {
                     top: 10,
                     right: 10,
                     child: GestureDetector(
-                      onTap: () => Get.toNamed('/editProfile'),
+                      onTap: () =>
+                          Navigator.of(context).pushNamed('/editProfile'),
+                      // Get.toNamed('/editProfile'),
                       child: const Icon(
                         Icons.edit_outlined,
                         color: nuetralBck,
@@ -150,7 +193,9 @@ class _ProfileDashState extends State<ProfileDash> {
                               bottom: 5,
                               right: 20,
                               child: TextButton(
-                                onPressed: () => Get.toNamed('/savedAddress'),
+                                onPressed: () => Navigator.of(context)
+                                    .pushNamed('/savedAddress'),
+                                // Get.toNamed('/savedAddress'),
                                 style: TextButton.styleFrom(
                                     side: const BorderSide(
                                         width: 1, color: accentColor)),
@@ -207,52 +252,3 @@ class _ProfileDashState extends State<ProfileDash> {
     );
   }
 }
-
-List<IconData> iconList = [
-  Icons.shopping_bag_outlined,
-  Icons.payment_outlined,
-  Icons.rate_review_outlined,
-  Icons.notifications_active_outlined,
-  Icons.delivery_dining_outlined,
-  Icons.help_center_outlined,
-  Icons.help_outline,
-  Icons.logout_outlined
-];
-
-List<String> titleList = [
-  'My Orders',
-  'My Payments',
-  'Ratings & Reviews',
-  'Notifications',
-  'My Delivery Address',
-  'Customer Service',
-  'About',
-  'Logout'
-];
-
-List<Function()?> onTapList = [
-  //My Orders
-  () {
-    Get.toNamed('/orderPage');
-  },
-  //My Payemnts
-  () {},
-  //Ratings & Reviews
-  () {},
-  //Notifications
-  () {},
-  //My Delivery Address
-  () {
-    Get.toNamed('/savedAddress');
-  },
-  //Customer Service
-  () {},
-  //About
-  () {},
-  //Logout
-  () {
-    FirebaseAuth.instance.signOut().then((value) {
-      Timer(const Duration(seconds: 3), () => Get.offNamed('/loginPage'));
-    });
-  },
-];

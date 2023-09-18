@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:grocers/src/constants/colour.dart';
-import 'package:grocers/src/features/authentication/screens/Address_view/btm_nav_address.dart';
-import 'package:grocers/src/features/authentication/screens/home_view/floating_view/floating_view.dart';
+import 'package:grocers/src/features/screens/Address_view/btm_nav_address.dart';
+import 'package:grocers/src/features/screens/home_view/floating_view/floating_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -45,7 +44,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const Spacer(),
                   GestureDetector(
-                    onTap: () => Get.toNamed('/profilePage'),
+                    onTap: () => Navigator.pushNamed(context,'/profilePage'),
+                    // Get.toNamed('/profilePage'),
                     child: const Icon(
                       Icons.account_circle_sharp,
                       size: 38,

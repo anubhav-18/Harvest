@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:grocers/src/constants/colour.dart';
-import 'package:grocers/src/features/authentication/screens/home_view/home.dart';
-import 'package:grocers/src/features/authentication/screens/order_view/orderPage.dart';
-import 'package:grocers/src/features/authentication/screens/wishList_view/wishList.dart';
+import 'package:grocers/src/features/screens/order_view/orderPage.dart';
+import 'package:grocers/src/features/screens/home_view/home.dart';
+import 'package:grocers/src/features/screens/wishList_view/wishList.dart';
 
 class BtmNavBar extends StatefulWidget {
   final int index;
@@ -19,6 +18,8 @@ class _BtmNavBarState extends State<BtmNavBar> {
   //   super.initState();
   //   _btmnavindex = widget.index;
   // }
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
 
   int _btmnavindex = 0;
 
@@ -30,10 +31,15 @@ class _BtmNavBarState extends State<BtmNavBar> {
       
       print(index);
     } else {
-      Get.toNamed('/cartPage');
+      Navigator.pushNamed(context,'/cartPage');
+      // Get.toNamed('/cartPage');
     }
+  }
 
-    
+  void onAnyIndex(int index){
+    setState(() {
+      _btmnavindex = index ; 
+    });
   }
 
   Widget pageCaller(int index) {
@@ -66,6 +72,7 @@ class _BtmNavBarState extends State<BtmNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: Center(child: pageCaller(_btmnavindex)),
       // IndexedStack(
       //   index: _btmnavindex,
