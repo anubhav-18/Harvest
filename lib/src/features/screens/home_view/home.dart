@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:grocers/src/constants/colour.dart';
 import 'package:grocers/src/features/screens/Address_view/btm_nav_address.dart';
 import 'package:grocers/src/features/screens/home_view/floating_view/floating_view.dart';
-import 'package:grocers/src/provider/auth_provider.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,7 +21,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final ap = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

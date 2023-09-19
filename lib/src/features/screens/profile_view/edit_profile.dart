@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grocers/src/constants/colour.dart';
 import 'package:grocers/src/common_widgets/customTextField.dart';
