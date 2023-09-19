@@ -28,35 +28,43 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     final ap = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
-      body: Container(
-        color: mainBckgrnd,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/images/logo_rm_bck.png',
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-                margin: const EdgeInsets.only(
-                    left: 20, right: 20, bottom: 15, top: 15),
-                width: double.infinity,
-                height: 50,
-                child: CustomButton(
-                    text: 'Get Started',
-                    onPressed: () async {
-                      if (ap.isSignedIn == true) {
-                        await ap.getDataFromSP().whenComplete(() =>
-                            Navigator.of(context)
-                                .pushReplacementNamed('/btmNav'));
-                      } else {
-                        Navigator.of(context)
-                            .pushReplacementNamed('/loginPage');
-                      }
-                    }))
-          ],
+      body: SafeArea(
+        child: Container(
+          color: mainBckgrnd,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.6,
+                child: Image.asset(
+                  'assets/images/logo_rm_bck.png',
+                ),
+              ),
+              const Spacer(),
+              Container(
+                  margin: const EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                    bottom: 15,
+                    top: 15,
+                  ),
+                  width: double.infinity,
+                  height: 50,
+                  child: CustomButton(
+                      text: 'Get Started',
+                      onPressed: () async {
+                        if (ap.isSignedIn == true) {
+                          await ap.getDataFromSP().whenComplete(() =>
+                              Navigator.of(context)
+                                  .pushReplacementNamed('/btmNav'));
+                        } else {
+                          Navigator.of(context)
+                              .pushReplacementNamed('/loginPage');
+                        }
+                      }))
+            ],
+          ),
         ),
       ),
     );

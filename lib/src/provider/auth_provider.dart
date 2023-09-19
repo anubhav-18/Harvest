@@ -138,20 +138,24 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future getDataFromFirestore() async {
+    // final snapshot = await _firebaseFirestore.collection("users").doc(_firebaseAuth.currentUser!.uid).get();
+    
     await _firebaseFirestore
         .collection("users")
         .doc(_firebaseAuth.currentUser!.uid)
         .get()
         .then((DocumentSnapshot<Map<String, dynamic>> snapshot) {
       _userModel = UserModel(
-          uid: uid,
-          firstName: snapshot['firstName'],
-          lastName: snapshot['lastName'],
-          email: snapshot['email'],
-          phoneNo: snapshot['phoneNo'],
-          createdAt: snapshot['createdAt']);
+        uid: uid,
+        firstName: snapshot['firstName'],
+        lastName: snapshot['lastName'],
+        email: snapshot['email'],
+        phoneNo: snapshot['phoneNo'],
+        createdAt: snapshot['createdAt'],
+      );
       _uid = userModel.uid;
     });
+    return _userModel ;
   }
 
   Future saveUserDataToSP() async {
@@ -173,5 +177,41 @@ class AuthProvider extends ChangeNotifier {
     _isSignedIn = false;
     notifyListeners();
     sp.clear();
+    print('Logout Succesfully');
+  }
+
+  Future updateData({
+    required BuildContext context,
+    required String firstname,
+    required String lastname,
+    required String email,
+  }) async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      Map<String, dynamic> userModel = {
+        "firstName": firstname,
+        "lastName": lastname,
+        "email": email
+      };
+      await _firebaseFirestore
+          .collection('users')
+          .doc(_firebaseAuth.currentUser!.uid)
+          .update(userModel)
+          .then((value) => saveUserDataToSP())
+          .whenComplete(
+            () {
+              showSnackBar(context, 'Profile Updated Succesfully');
+            },
+          );
+      _isLoading = false;
+      notifyListeners();
+      print('Data is Updated');
+    } on FirebaseAuthException catch (e) {
+      showSnackBar(context, e.message.toString());
+      print("Data is Not Upadted");
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocers/src/constants/colour.dart';
 import 'package:grocers/src/provider/auth_provider.dart';
+import 'package:grocers/src/utils/utils.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -23,19 +24,19 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                alignment: Alignment.topRight,
-                child: TextButton(
-                  onPressed: () => Navigator.of(context).pushNamed('/btmNav'),
-                  child: const Text(
-                    'Skip',
-                    style: TextStyle(
-                        color: mainBckgrnd,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
+              // Container(
+              //   alignment: Alignment.topRight,
+              //   child: TextButton(
+              //     onPressed: () => Navigator.of(context).pushNamed('/btmNav'),
+              //     child: const Text(
+              //       'Skip',
+              //       style: TextStyle(
+              //           color: mainBckgrnd,
+              //           fontSize: 18,
+              //           fontWeight: FontWeight.bold),
+              //     ),
+              //   ),
+              // ),
               const SizedBox(
                 height: 15,
               ),
@@ -57,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                       color: textIcons,
                       fontWeight: FontWeight.w700)),
               const SizedBox(
-                height: 100,
+                height: 120,
               ),
               Expanded(
                 child: Column(children: [
@@ -75,6 +76,11 @@ class _LoginPageState extends State<LoginPage> {
                       });
                     },
                     decoration: InputDecoration(
+                      focusedBorder: const UnderlineInputBorder(
+                          borderSide: BorderSide(
+                              color: mainBckgrnd,
+                              width: 2,
+                              style: BorderStyle.solid)),
                       hintText: 'Enter your Phone Number',
                       prefixIcon: const Text('+91 - ',
                           style: TextStyle(
@@ -84,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                           )),
                       prefixIconConstraints:
                           const BoxConstraints(minHeight: 0, minWidth: 0),
-                      suffixIcon: phoneController.text.length >= 10
+                      suffixIcon: phoneController.text.length == 10
                           ? Container(
                               height: 30,
                               width: 30,
@@ -107,7 +113,14 @@ class _LoginPageState extends State<LoginPage> {
                     height: 50,
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () => sendPhoneNo(),
+                      onPressed: () { 
+                        if(phoneController.text.length == 10){
+                          sendPhoneNo();
+                        }
+                        else {
+                          showSnackBar(context, 'Enter an 10-Digit Phone Number');
+                        }
+                        },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: mainBckgrnd,
                           shape: RoundedRectangleBorder(

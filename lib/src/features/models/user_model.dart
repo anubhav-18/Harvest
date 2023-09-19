@@ -5,6 +5,9 @@ class UserModel {
   String uid;
   String phoneNo;
   String createdAt;
+  // String gender;
+  // String dob;
+  
 
   UserModel(
       {required this.uid,
@@ -12,7 +15,10 @@ class UserModel {
       required this.lastName,
       required this.email,
       required this.phoneNo,
-      required this.createdAt});
+      required this.createdAt,
+      // required this.gender,
+      // required this.dob
+      });
 
   // from map 
   factory UserModel.fromMap(Map<String, dynamic> map) {
@@ -23,6 +29,8 @@ class UserModel {
       email: map['email'] ?? '',
       phoneNo: map['phoneNo'] ?? '',
       createdAt: map['createdAt'] ?? '',
+      // gender:  map['gender'] ?? '',
+      // dob:  map['dob'] ?? '',
     );
   }
 
@@ -35,6 +43,8 @@ class UserModel {
       "email": email,
       "phoneNo": phoneNo,
       "createdAt": createdAt,
+      // "gender": gender,
+      // "dob": dob , 
     };
   }
 }
