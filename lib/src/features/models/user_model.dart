@@ -5,6 +5,7 @@ class UserModel {
   String uid;
   String phoneNo;
   String createdAt;
+  // String address;
   // String gender;
   // String dob;
   
@@ -16,6 +17,7 @@ class UserModel {
       required this.email,
       required this.phoneNo,
       required this.createdAt,
+      // required this.address
       // required this.gender,
       // required this.dob
       });
@@ -29,6 +31,7 @@ class UserModel {
       email: map['email'] ?? '',
       phoneNo: map['phoneNo'] ?? '',
       createdAt: map['createdAt'] ?? '',
+      // address: map['address'] ?? '',
       // gender:  map['gender'] ?? '',
       // dob:  map['dob'] ?? '',
     );
@@ -43,6 +46,7 @@ class UserModel {
       "email": email,
       "phoneNo": phoneNo,
       "createdAt": createdAt,
+      // "address": address,
       // "gender": gender,
       // "dob": dob , 
     };

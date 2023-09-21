@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:grocers/src/features/screens/login_view/otp_view.dart';
 import 'package:grocers/src/utils/utils.dart';
@@ -11,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../features/models/user_model.dart';
 
 class AuthProvider extends ChangeNotifier {
-  // static AuthenticationRepository get instance => Get.find();
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
@@ -107,6 +105,24 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  Future<bool> checkUserAddress(BuildContext context) async {
+    final userDoc = await _firebaseFirestore
+        .collection('users')
+        .doc(_firebaseAuth.currentUser!.uid)
+        .get();
+    if (userDoc.exists) {
+      final userAddress = userDoc.data()?['address'];
+      if(userAddress == null || userAddress.isEmpty){
+        return false ;
+      }else{
+        return true ;
+       }
+    }
+    else {
+      return false;
+    }
+  }
+
   void saveUserDataToFirebase({
     required BuildContext context,
     required UserModel userModel,
@@ -138,8 +154,6 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future getDataFromFirestore() async {
-    // final snapshot = await _firebaseFirestore.collection("users").doc(_firebaseAuth.currentUser!.uid).get();
-    
     await _firebaseFirestore
         .collection("users")
         .doc(_firebaseAuth.currentUser!.uid)
@@ -155,7 +169,7 @@ class AuthProvider extends ChangeNotifier {
       );
       _uid = userModel.uid;
     });
-    return _userModel ;
+    return _userModel;
   }
 
   Future saveUserDataToSP() async {
@@ -180,7 +194,7 @@ class AuthProvider extends ChangeNotifier {
     print('Logout Succesfully');
   }
 
-  Future updateData({
+  Future updateDataProfileData({
     required BuildContext context,
     required String firstname,
     required String lastname,
@@ -200,10 +214,10 @@ class AuthProvider extends ChangeNotifier {
           .update(userModel)
           .then((value) => saveUserDataToSP())
           .whenComplete(
-            () {
-              showSnackBar(context, 'Profile Updated Succesfully');
-            },
-          );
+        () {
+          showSnackBar(context, 'Profile Updated Succesfully');
+        },
+      );
       _isLoading = false;
       notifyListeners();
       print('Data is Updated');
@@ -214,4 +228,5 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
 }

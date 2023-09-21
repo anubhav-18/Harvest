@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:grocers/firebase_options.dart';
 import 'package:grocers/src/features/screens/Address_view/add_new_address.dart';
 import 'package:grocers/src/features/screens/Address_view/saved_address.dart';
+import 'package:grocers/src/features/screens/Address_view/userCheckLocation.dart';
 import 'package:grocers/src/features/screens/cart_view/cart_page.dart';
 import 'package:grocers/src/features/screens/home_view/BtmNav/btm_nav.dart';
 import 'package:grocers/src/features/screens/home_view/home.dart';
@@ -14,6 +15,7 @@ import 'package:grocers/src/features/screens/profile_view/profile_dashboard.dart
 import 'package:grocers/src/features/screens/splashscreen_view/splashscreen.dart';
 import 'package:grocers/src/features/screens/wishList_view/wishList.dart';
 import 'package:grocers/src/provider/auth_provider.dart';
+import 'package:grocers/src/provider/location_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -31,6 +33,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => LocationProvider()),
       ],
       child: MaterialApp(
         home: const SplashScreen(),
@@ -55,6 +58,7 @@ class MyApp extends StatelessWidget {
           '/orderPage': (context) => const MyOrders(),
           '/cartPage': (context) => const CartPage(),
           '/FirstTimeLoginPage': (context) => const FirstTimeLoginInfo(),
+          '/userCheckLoc': (context) => const UserCheckLoc(),
         },
       ),
     );

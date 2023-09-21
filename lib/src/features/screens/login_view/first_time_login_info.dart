@@ -246,6 +246,7 @@ class _FirstTimeLoginInfoState extends State<FirstTimeLoginInfo> {
         firstName: firstNameController.text.trim(),
         lastName: lastNameController.text.trim(),
         email: emailController.text.trim(),
+        // address: "",
         // gender: genderController.text.trim(),
         // dob: dobController.text.trim(),
         uid: "",

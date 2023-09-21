@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocers/src/constants/colour.dart';
+import 'package:grocers/src/provider/location_provider.dart';
+import 'package:provider/provider.dart';
 
 class BtmNavAddress extends StatelessWidget {
   const BtmNavAddress({
@@ -8,6 +10,7 @@ class BtmNavAddress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lp = Provider.of<LocationProvider>(context);
     double height = MediaQuery.of(context).size.height;
     return TextButton(
       onPressed: () {
@@ -84,12 +87,12 @@ class BtmNavAddress extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(color: Colors.grey),
                               color: Colors.white,
-                              boxShadow: const [
+                              boxShadow: [
                                 BoxShadow(
-                                    color: mainBckgrnd,
+                                    color: textIcons.withOpacity(0.5),
                                     spreadRadius: 1,
                                     blurRadius: 3,
-                                    offset: Offset(3, 4))
+                                    offset: const Offset(3, 4))
                               ]),
                           child: Stack(alignment: Alignment.center, children: [
                             Positioned(
@@ -102,7 +105,8 @@ class BtmNavAddress extends StatelessWidget {
                                     backgroundColor: Colors.white,
                                     radius: 29,
                                     child: GestureDetector(
-                                      onTap: () => Navigator.pushNamed(context, '/addAddress'),
+                                      onTap: () => Navigator.pushNamed(
+                                          context, '/savedAddress'),
                                       // Get.toNamed('/addAddress'),
                                       child: const Icon(
                                         Icons.add,
@@ -118,7 +122,8 @@ class BtmNavAddress extends StatelessWidget {
                                   'Add an Address',
                                   style: TextStyle(
                                       fontSize: 17,
-                                      color: textIcons,
+                                      color: mainBckgrnd,
+                                      fontFamily: 'ADLaMDisplay',
                                       fontWeight: FontWeight.bold),
                                 ))
                           ]),
@@ -168,7 +173,7 @@ class BtmNavAddress extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 6),
                             child: TextButton(
-                              onPressed: () => Navigator.pop(context),
+                              onPressed: () => lp.getCurrentLocation(context).whenComplete(() => Navigator.of(context).pushNamed('/addAddress')),
                               child: const Text(
                                 'Detect my location',
                                 style: TextStyle(
@@ -189,13 +194,32 @@ class BtmNavAddress extends StatelessWidget {
       style: TextButton.styleFrom(
         padding: EdgeInsets.zero,
       ),
-      child: const Text('+ Add an Address',
-          style: TextStyle(
-              fontSize: 18, color: textIcons, fontWeight: FontWeight.bold)),
+      child:
+          // checkAddress(context)
+          const Text('+ Add an Address',
+              style: TextStyle(
+                  fontSize: 18, color: textIcons, fontWeight: FontWeight.bold)),
     );
   }
-}
 
+  // void checkAddress(BuildContext context) {
+  //   final ap = Provider.of<AuthProvider>(context, listen: false);
+  //   ap.checkUserAddress(context).then((value) {
+  //     if (value == true) {
+  //       return Text(ap.userModel.address);
+  //     } else {
+  //       return const Text(
+  //         '+ Add an Address',
+  //         style: TextStyle(
+  //           fontSize: 18,
+  //           color: textIcons,
+  //           fontWeight: FontWeight.bold,
+  //         ),
+  //       );
+  //     }
+  //   });
+  // }
+}
 
 Future<dynamic> pinCodeBtmModal(BuildContext context, double height) {
   return showModalBottomSheet(

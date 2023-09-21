@@ -19,9 +19,10 @@ class ReuseTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20,left: 20 ,right: 20 , top: 10),
+      padding: const EdgeInsets.only(bottom: 10,left: 20 ,right: 20 , top: 10),
       child: TextFormField(
         // initialValue: initialValueText,
+        
         controller: controller,
         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         decoration: InputDecoration(
@@ -39,7 +40,7 @@ class ReuseTextField extends StatelessWidget {
                     icon: const Icon(Icons.remove_red_eye, color: Colors.grey),
                     onPressed: () {})
                 : null,
-            contentPadding: const EdgeInsets.only(bottom: 5),
+            contentPadding: const EdgeInsets.only(bottom: 8),
             labelText: labelText,
             labelStyle: const TextStyle(
                 color: textIcons, fontFamily: 'ADLaMDisplay', fontSize: 22),

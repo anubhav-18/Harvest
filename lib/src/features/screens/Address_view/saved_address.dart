@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocers/src/constants/colour.dart';
+import 'package:grocers/src/provider/location_provider.dart';
+import 'package:provider/provider.dart';
 
 class SavedAddress extends StatefulWidget {
   const SavedAddress({super.key});
@@ -11,6 +13,9 @@ class SavedAddress extends StatefulWidget {
 class _SavedAddressState extends State<SavedAddress> {
   @override
   Widget build(BuildContext context) {
+    final lp = Provider.of<LocationProvider>(context);
+    final isLoading =
+        Provider.of<LocationProvider>(context, listen: true).isLoading;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mainBckgrnd,
@@ -50,9 +55,11 @@ class _SavedAddressState extends State<SavedAddress> {
             ),
             Expanded(
               child: ListView.separated(
-                  itemCount: titleAddress.length ,
+                  itemCount: titleAddress.length,
                   separatorBuilder: (context, index) {
-                    return const SizedBox(height: 20,);
+                    return const SizedBox(
+                      height: 20,
+                    );
                   },
                   itemBuilder: (BuildContext context, int index) {
                     return ListTile(
@@ -66,7 +73,8 @@ class _SavedAddressState extends State<SavedAddress> {
                         children: [
                           Row(
                             children: [
-                              Text( titleAddress[index],
+                              Text(
+                                titleAddress[index],
                                 style: const TextStyle(
                                   fontSize: 17,
                                   fontFamily: 'ADLaMDisplay',
@@ -74,15 +82,15 @@ class _SavedAddressState extends State<SavedAddress> {
                               ),
                               const Spacer(),
                               PopupMenuButton(
-                                elevation: 4,
-                                shape: RoundedRectangleBorder(
-                                  side: const BorderSide(width: 1,color: nuetralBck),
-                                  borderRadius: BorderRadius.circular(8)
-                                ),
+                                  elevation: 4,
+                                  shape: RoundedRectangleBorder(
+                                      side: const BorderSide(
+                                          width: 1, color: nuetralBck),
+                                      borderRadius: BorderRadius.circular(8)),
                                   itemBuilder: (BuildContext context) => [
-                                    popMenuItemsList('Edit', Icons.edit),
-                                    popMenuItemsList('Delete', Icons.delete)
-                                  ]),
+                                        popMenuItemsList('Edit', Icons.edit),
+                                        popMenuItemsList('Delete', Icons.delete)
+                                      ]),
                             ],
                           ),
                           Row(
@@ -109,7 +117,8 @@ class _SavedAddressState extends State<SavedAddress> {
                               ),
                             ],
                           ),
-                          Text( ('Phone: ${phoneAddress[index]}'),
+                          Text(
+                            ('Phone: ${phoneAddress[index]}'),
                             style: const TextStyle(
                               // fontFamily: 'ADLaMDisplay',
                               fontWeight: FontWeight.bold,
@@ -130,59 +139,75 @@ class _SavedAddressState extends State<SavedAddress> {
       ),
       bottomNavigationBar: Material(
         color: nuetralBck,
-        child: Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: textIcons.withOpacity(0.7))),
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: GestureDetector(
-              onTap: () => Navigator.pushNamed(context,'/addAddress'),
-              // Get.toNamed('/addAddress'),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(25)),
-                    border: Border.all(color: Colors.black.withOpacity(0.5))),
-                height: 45,
-                width: double.infinity,
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.add,
-                      size: 28,
-                    ),
-                    Text(
-                      'Add New Address',
-                      style: TextStyle(
-                        fontFamily: 'ADLaMDisplay',
-                        fontSize: 20,
-                        color: mainBckgrnd,
-                      ),
-                    ),
-                  ],
-                ),
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: GestureDetector(
+            onTap: () => lp.getCurrentLocation(context).whenComplete(
+                () => Navigator.of(context).pushNamed('/userCheckLoc')),
+            child: Container(
+              decoration: const BoxDecoration(
+                color: mainBckgrnd,
+                borderRadius: BorderRadius.all(Radius.circular(25)),
               ),
+              height: 45,
+              width: double.infinity,
+              child: isLoading == true
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        color: whiteclr,
+                        strokeWidth: 2,
+                      ),
+                    )
+                  : const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.add,
+                          size: 28,
+                          color: nuetralBck,
+                        ),
+                        Text(
+                          'Add New Address',
+                          style: TextStyle(
+                            fontFamily: 'ADLaMDisplay',
+                            fontSize: 20,
+                            color: nuetralBck,
+                          ),
+                        ),
+                      ],
+                    ),
             ),
           ),
         ),
       ),
-    
     );
-  } 
+  }
 }
 
 PopupMenuItem<dynamic> popMenuItemsList(String title, IconData icon) {
-    return PopupMenuItem(
-        onTap: () {},
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Icon(icon, size: 22 ,weight: 4,color: textIcons,), 
-            const SizedBox(width: 15,),
-            Text(title,style: const TextStyle(fontSize: 16,color: textIcons, fontWeight: FontWeight.bold),)],
-        ));
-  }
+  return PopupMenuItem(
+      onTap: () {},
+      padding: const EdgeInsets.all(10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(
+            icon,
+            size: 22,
+            weight: 4,
+            color: textIcons,
+          ),
+          const SizedBox(
+            width: 15,
+          ),
+          Text(
+            title,
+            style: const TextStyle(
+                fontSize: 16, color: textIcons, fontWeight: FontWeight.bold),
+          )
+        ],
+      ));
+}
 
 List<String> titleAddress = [
   'Anubhav Bindal',
@@ -201,6 +226,3 @@ List<String> phoneAddress = [
   '9412800087',
   '6395836564',
 ];
-
-
-

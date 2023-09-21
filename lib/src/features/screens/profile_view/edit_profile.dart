@@ -153,7 +153,7 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                   onPressed: () {
                     ap
-                        .updateData(
+                        .updateDataProfileData(
                             context: context,
                             firstname: firstNameController.text.trim(),
                             lastname: lastNameController.text.trim(),
