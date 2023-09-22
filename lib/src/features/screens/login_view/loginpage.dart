@@ -24,19 +24,6 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Container(
-              //   alignment: Alignment.topRight,
-              //   child: TextButton(
-              //     onPressed: () => Navigator.of(context).pushNamed('/btmNav'),
-              //     child: const Text(
-              //       'Skip',
-              //       style: TextStyle(
-              //           color: mainBckgrnd,
-              //           fontSize: 18,
-              //           fontWeight: FontWeight.bold),
-              //     ),
-              //   ),
-              // ),
               const SizedBox(
                 height: 15,
               ),
@@ -149,6 +136,7 @@ class _LoginPageState extends State<LoginPage> {
   void sendPhoneNo() {
     final ap = Provider.of<AuthProvider>(context, listen: false);
     String phoneNumber = phoneController.text.trim();
-    ap.signInWithPhone(context, "+91$phoneNumber");
+    ap.signInWithPhone(context, "+91$phoneNumber" , phoneController.text);
   }
+
 }

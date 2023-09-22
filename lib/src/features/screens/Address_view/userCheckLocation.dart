@@ -81,10 +81,12 @@ class _UserCheckLocState extends State<UserCheckLoc> {
             height: MediaQuery.of(context).size.height * 0.55,
             width: double.infinity,
             child: GoogleMap(
-                mapType: MapType.normal,
-                initialCameraPosition: CameraPosition(
-                    target: LatLng(lp.latitude!, lp.longitude!),
-                    zoom: 14.4743)),
+              mapType: MapType.normal,
+              initialCameraPosition: CameraPosition(
+                  target: LatLng(lp.latitude!, lp.longitude!), zoom: 14.4743),
+              zoomControlsEnabled: false, 
+              myLocationEnabled: true,
+            ),
           ),
           const Padding(
             padding: EdgeInsets.all(15),
@@ -105,20 +107,20 @@ class _UserCheckLocState extends State<UserCheckLoc> {
             child: Align(
               alignment: Alignment.centerLeft,
               child: RichText(
-                softWrap: true,
-                maxLines: 3,
-                textAlign: TextAlign.left,
-                textDirection: TextDirection.ltr,
-                overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                  maxLines: 3,
+                  textAlign: TextAlign.left,
+                  textDirection: TextDirection.ltr,
+                  overflow: TextOverflow.ellipsis,
                   text: TextSpan(
-                text:
-                    '156/35, Neerav Nikunj, Sikandra, Agra, 282007, Uttar Pradesh 156/35, Neerav Nikunj, Sikandra, Agra, 282007, Uttar Pradesh',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: textIcons.withOpacity(0.8),
-                  fontWeight: FontWeight.bold,
-                ),
-              )),
+                    text:
+                        '156/35, Neerav Nikunj, Sikandra, Agra, 282007, Uttar Pradesh 156/35, Neerav Nikunj, Sikandra, Agra, 282007, Uttar Pradesh',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: textIcons.withOpacity(0.8),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )),
             ),
           ),
         ],

@@ -8,7 +8,12 @@ import 'package:provider/provider.dart';
 
 class OTPScreen extends StatefulWidget {
   final String verificationId;
-  const OTPScreen({super.key, required this.verificationId});
+  final String phoneController;
+  const OTPScreen({
+    super.key,
+    required this.verificationId,
+    required this.phoneController ,
+  });
 
   @override
   State<OTPScreen> createState() => _OTPScreenState();
@@ -21,7 +26,6 @@ class _OTPScreenState extends State<OTPScreen> {
   Widget build(BuildContext context) {
     final isLoading =
         Provider.of<AuthProvider>(context, listen: true).isLoading;
-    // final ap = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -84,9 +88,10 @@ class _OTPScreenState extends State<OTPScreen> {
                 padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                 child: Align(
                   alignment: Alignment.topLeft,
-                  child: RichText(
+                  child: 
+                  RichText(
                       text: TextSpan(
-                          text: '+91 8881284276',
+                          text: "+91 ${widget.phoneController}",
                           style: const TextStyle(
                               color: textIcons,
                               fontFamily: 'ADLaMDisplay',
@@ -212,8 +217,8 @@ class _OTPScreenState extends State<OTPScreen> {
               ap.getDataFromFirestore().then((value) => ap
                   .saveUserDataToSP()
                   .then((value) => ap.setSignIn().then((value) =>
-                      Navigator.of(context)
-                          .pushNamedAndRemoveUntil('/btmNav', (route) => false))));
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          '/btmNav', (route) => false))));
             } else {
               Navigator.of(context).pushNamedAndRemoveUntil(
                   '/FirstTimeLoginPage', (route) => false);

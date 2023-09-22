@@ -10,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../features/models/user_model.dart';
 
 class AuthProvider extends ChangeNotifier {
-
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
@@ -40,7 +39,8 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void signInWithPhone(BuildContext context, String phoneNo) async {
+  void signInWithPhone(
+      BuildContext context, String phoneNo, String phoneController) async {
     try {
       _firebaseAuth.verifyPhoneNumber(
           phoneNumber: phoneNo,
@@ -55,7 +55,10 @@ class AuthProvider extends ChangeNotifier {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => OTPScreen(verificationId: verificationId),
+                builder: (context) => OTPScreen(
+                  verificationId: verificationId,
+                  phoneController: phoneController,
+                ),
               ),
             );
           },
@@ -112,13 +115,12 @@ class AuthProvider extends ChangeNotifier {
         .get();
     if (userDoc.exists) {
       final userAddress = userDoc.data()?['address'];
-      if(userAddress == null || userAddress.isEmpty){
-        return false ;
-      }else{
-        return true ;
-       }
-    }
-    else {
+      if (userAddress == null || userAddress.isEmpty) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
       return false;
     }
   }
@@ -228,5 +230,4 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-
 }
