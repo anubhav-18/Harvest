@@ -87,12 +87,12 @@ class _EditProfileState extends State<EditProfile> {
                 labelText: "Last Name",
                 placeholder: "",
                 isPasswordTextField: false),
-            ReuseTextField(
-                // initialValueText: ap.userModel.email,
-                controller: emailController,
-                labelText: "Email",
-                placeholder: "",
-                isPasswordTextField: false),
+            // ReuseTextField(
+            //     // initialValueText: ap.userModel.email,
+            //     controller: emailController,
+            //     labelText: "Email",
+            //     placeholder: "",
+            //     isPasswordTextField: false),
             //   const Text(
             //     'Gender',
             //     style: TextStyle(

@@ -145,7 +145,7 @@ class _FloatingButtonState extends State<FloatingButton>
                   onPressed: dialogBox,
                   tooltip: 'Toggle',
                   child: Icon(
-                    isOpened ? Icons.close : Icons.widgets,
+                    isOpened ? Icons.close : Icons.widgets, color: Colors.white,
                   ),
                 ),
               );

@@ -265,6 +265,7 @@ class _FirstTimeLoginInfoState extends State<FirstTimeLoginInfo> {
                           .pushNamedAndRemoveUntil('/btmNav', (route) => false),
                     ),
               );
+          showSnackBar(context, 'Welcome to Harvest');
         },
       );
     } else {

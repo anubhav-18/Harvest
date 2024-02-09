@@ -48,7 +48,6 @@ class MyApp extends StatelessWidget {
         routes: {
           '/homePage': (context) => const HomePage(),
           '/loginPage': (context) => const LoginPage(),
-          // '/otpPage' :(context) => const OTPScreen(verificationId: "",),
           '/profilePage': (context) => const ProfileDash(),
           '/editProfile': (context) => const EditProfile(),
           '/btmNav': (context) => const BtmNavBar(),

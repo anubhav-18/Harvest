@@ -219,6 +219,7 @@ class _OTPScreenState extends State<OTPScreen> {
                   .then((value) => ap.setSignIn().then((value) =>
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           '/btmNav', (route) => false))));
+              showSnackBar(context, 'Welcome to Harvest');
             } else {
               Navigator.of(context).pushNamedAndRemoveUntil(
                   '/FirstTimeLoginPage', (route) => false);

@@ -10,6 +10,7 @@ void showSnackBar(BuildContext context, String content) {
       behavior: SnackBarBehavior.floating,
       backgroundColor: textIcons,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      duration: const Duration(milliseconds: 2000),
     ),
   );
 }

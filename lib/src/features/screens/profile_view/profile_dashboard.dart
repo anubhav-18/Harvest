@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:grocers/src/constants/colour.dart';
 import 'package:grocers/src/features/models/user_model.dart';
 import 'package:grocers/src/provider/auth_provider.dart';
+import 'package:grocers/src/utils/utils.dart';
 import 'package:provider/provider.dart';
 
 class ProfileDash extends StatefulWidget {
@@ -17,7 +18,7 @@ class _ProfileDashState extends State<ProfileDash> {
     final ap = Provider.of<AuthProvider>(context, listen: false);
     List<Function()?> onTapList = [
       //My Orders
-      () {},
+      () => Navigator.pushNamed(context, '/orderPage'),
       //My Payemnts
       () {},
       //Ratings & Reviews
@@ -25,14 +26,17 @@ class _ProfileDashState extends State<ProfileDash> {
       //Notifications
       () {},
       //My Delivery Address
-      () {},
+      () => Navigator.pushNamed(context, '/savedAddress'),
       //Customer Service
       () {},
       //About
       () {},
       //Logout
-      () => ap.signOut().then((value) => Navigator.of(context)
-          .pushNamedAndRemoveUntil('/loginPage', (route) => false)),
+      () {
+        ap.signOut().then((value) => Navigator.of(context)
+            .pushNamedAndRemoveUntil('/loginPage', (route) => false));
+        showSnackBar(context, 'Logout Succesfully');
+      }
     ];
 
     List<IconData> iconList = [
@@ -262,7 +266,6 @@ class _ProfileDashState extends State<ProfileDash> {
                               );
                             }),
                       ),
-                    
                     ],
                   );
                 } else if (snapshot.hasError) {
@@ -274,13 +277,12 @@ class _ProfileDashState extends State<ProfileDash> {
                     child: Text('Something has Error hello guys '),
                   );
                 }
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
               }
-              else {
-                return const Center(child: CircularProgressIndicator(),);
-              }
-
             }));
-  
   }
 }
 

@@ -107,13 +107,11 @@ class MyOrders extends StatefulWidget {
 }
 
 class _MyOrdersState extends State<MyOrders> {
-
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
 
-    var height = MediaQuery.of(context).size.height ; 
-    var width = MediaQuery.of(context).size.width ; 
-    
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -139,7 +137,6 @@ class _MyOrdersState extends State<MyOrders> {
           IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart)),
         ],
       ),
-      
       body: Container(
         margin: const EdgeInsets.all(15),
         child: Column(
@@ -180,22 +177,25 @@ class _MyOrdersState extends State<MyOrders> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: Size(width*0.9, height*0.065),
-                        backgroundColor: mainBckgrnd,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25))),
-                    child: const Text(
-                      'Explore Products',
-                      style: TextStyle(fontSize: 22, fontFamily: 'ADLaMDisplay',),
-                    )),
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: Size(width * 0.9, height * 0.065),
+                      backgroundColor: mainBckgrnd,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25))),
+                  child: const Text(
+                    'Explore Products',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontFamily: 'ADLaMDisplay',
+                    ),
+                  ),
+                ),
               ),
-            )
-          
+            ),
           ],
-        
         ),
       ),
     );

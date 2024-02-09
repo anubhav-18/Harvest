@@ -149,10 +149,6 @@ class _CartPageState extends State<CartPage> {
             fontFamily: 'ADLaMDisplay',
           ),
         ),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-          // IconButton(onPressed: () {}, icon: const Icon(CupertinoIcons.heart_fill)),
-        ],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -160,26 +156,32 @@ class _CartPageState extends State<CartPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Header
               Container(
                 margin: kDefaultPaddingWObottom,
-                child: const Row(
+                child: Row(
                   children: [
-                    Text('Groceries Basket (2)',
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: textIcons,
-                          fontFamily: 'ADLaMDisplay',
-                        )),
-                    Spacer(),
-                    Text('\u{20B9}479',
-                        style: TextStyle(
-                          fontSize: 22,
-                          color: textIcons,
-                          fontFamily: 'ADLaMDisplay',
-                        )),
+                    Text(
+                      'Groceries Basket (${title.length})',
+                      style: const TextStyle(
+                        fontSize: 22,
+                        color: textIcons,
+                        fontFamily: 'ADLaMDisplay',
+                      ),
+                    ),
+                    const Spacer(),
+                    const Text(
+                      '\u{20B9}479',
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: textIcons,
+                        fontFamily: 'ADLaMDisplay',
+                      ),
+                    ),
                   ],
                 ),
               ),
+              // Product Tile
               Container(
                 margin: kDefaultPaddingWObottom,
                 color: whiteclr,
@@ -221,27 +223,26 @@ class _CartPageState extends State<CartPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       RichText(
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                          softWrap: true,
-                                          textScaleFactor: 1,
-                                          textDirection: TextDirection.ltr,
-                                          text: TextSpan(
-                                            text: title[index],
-                                            style: const TextStyle(
-                                                fontSize: 17,
-                                                color: textIcons,
-                                                fontWeight: FontWeight.bold),
-                                          )),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        softWrap: true,
+                                        textDirection: TextDirection.ltr,
+                                        text: TextSpan(
+                                          text: title[index],
+                                          style: const TextStyle(
+                                              fontSize: 17,
+                                              color: textIcons,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
                                       RichText(
-                                          text: TextSpan(
-                                              text:
-                                                  '\u{20B9}${newPrice[index]}',
-                                              style: const TextStyle(
-                                                  fontSize: 18,
-                                                  fontFamily: 'ADLaMDisplay',
-                                                  color: textIcons),
-                                              children: [
+                                        text: TextSpan(
+                                          text: '\u{20B9}${newPrice[index]}',
+                                          style: const TextStyle(
+                                              fontSize: 18,
+                                              fontFamily: 'ADLaMDisplay',
+                                              color: textIcons),
+                                          children: [
                                             const WidgetSpan(
                                                 child: Padding(
                                                     padding: EdgeInsets.only(
@@ -254,7 +255,9 @@ class _CartPageState extends State<CartPage> {
                                                     color: greyclr,
                                                     decoration: TextDecoration
                                                         .lineThrough))
-                                          ])),
+                                          ],
+                                        ),
+                                      ),
                                       Container(
                                         padding: const EdgeInsets.all(5),
                                         decoration: BoxDecoration(
@@ -293,18 +296,20 @@ class _CartPageState extends State<CartPage> {
                                     child: CircleAvatar(
                                       radius: 19,
                                       backgroundColor: whiteclr,
-                                      child: Stack(children: [
-                                        Align(
-                                          alignment: Alignment.center,
-                                          child: IconButton(
-                                            onPressed:_decrement,
-                                            icon: const Icon(
-                                              Icons.remove,
-                                              color: mainBckgrnd,
+                                      child: Stack(
+                                        children: [
+                                          Align(
+                                            alignment: Alignment.center,
+                                            child: IconButton(
+                                              onPressed: _decrement,
+                                              icon: const Icon(
+                                                Icons.remove,
+                                                color: mainBckgrnd,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ]),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   const SizedBox(
@@ -327,18 +332,20 @@ class _CartPageState extends State<CartPage> {
                                     child: CircleAvatar(
                                       radius: 19,
                                       backgroundColor: whiteclr,
-                                      child: Stack(children: [
-                                        Align(
-                                          alignment: Alignment.center,
-                                          child: IconButton(
-                                            onPressed: _increment,
-                                            icon: const Icon(
-                                              Icons.add,
-                                              color: mainBckgrnd,
+                                      child: Stack(
+                                        children: [
+                                          Align(
+                                            alignment: Alignment.center,
+                                            child: IconButton(
+                                              onPressed: _increment,
+                                              icon: const Icon(
+                                                Icons.add,
+                                                color: mainBckgrnd,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ]),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -462,6 +469,7 @@ class _CartPageState extends State<CartPage> {
           ),
         ),
       ),
+      // Bottom Bar / Payment Info
       bottomNavigationBar: Container(
         margin: kDefaultPaddingBttmNav,
         height: height * 0.08,
