@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:grocers/src/utils/utils.dart';
 
 class LocationProvider extends ChangeNotifier {
-  // String? _currentAddress;
-  // String? get currentAddress => _currentAddress;
-  // LatLng? _currentPosition;
-  // LatLng? get currentPosition => _currentPosition;
+  String? _currentAddress;
+  String? get currentAddress => _currentAddress;
   bool _isLoading = false;
   bool get isLoading => _isLoading;
   double? _longitude;
@@ -67,6 +66,29 @@ class LocationProvider extends ChangeNotifier {
       // ignore: use_build_context_synchronously
       showSnackBar(context, "Some error is there. Please retry.");
       print(e.toString());
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> getCurrentAddress(BuildContext context) async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(_latitude ?? 0.0, _longitude ?? 0.0);
+      Placemark currentPlace = placemarks[0];
+      _currentAddress =
+          "${currentPlace.street}, ${currentPlace.subLocality}, ${currentPlace.locality}, ${currentPlace.subAdministrativeArea}, ${currentPlace.country}, ${currentPlace.postalCode}";
+          
+      print("Address is Fetched");
+      notifyListeners();
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      showSnackBar(context, "Some error occurred. Please try again.");
+      print(e.toString());
+    } finally {
       _isLoading = false;
       notifyListeners();
     }

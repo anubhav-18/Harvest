@@ -2,19 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grocers/src/constants/colour.dart';
 import 'package:grocers/src/common_widgets/customTextField.dart';
+import 'package:grocers/src/features/models/user_model.dart';
+import 'package:grocers/src/provider/address_provider.dart';
+import 'package:grocers/src/provider/auth_provider.dart';
 import 'package:grocers/src/provider/location_provider.dart';
+import 'package:grocers/src/utils/utils.dart';
 import 'package:provider/provider.dart';
 
-class AddNewAddress extends StatelessWidget {
+import '../../../common_widgets/saveAsButton.dart';
+
+class AddNewAddress extends StatefulWidget {
   const AddNewAddress({super.key});
 
   @override
+  State<AddNewAddress> createState() => _AddNewAddressState();
+}
+
+class _AddNewAddressState extends State<AddNewAddress> {
+  String selectedLabel = '';
+  bool showOtherTextField = false;
+  TextEditingController houseNoController = TextEditingController();
+  TextEditingController addressline1Controller = TextEditingController();
+  TextEditingController addressline2Controller = TextEditingController();
+  TextEditingController landmarkController = TextEditingController();
+  TextEditingController floorNoController = TextEditingController();
+  TextEditingController emptyController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
-    TextEditingController houseNoController = TextEditingController();
-    TextEditingController addressline1Controller = TextEditingController();
-    TextEditingController addressline2Controller = TextEditingController();
-    TextEditingController landmarkController = TextEditingController();
-    TextEditingController floorNoController = TextEditingController();
     final lp = Provider.of<LocationProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -109,23 +124,55 @@ class AddNewAddress extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 20, top: 10),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 10),
                   child: Row(
                     children: [
                       SaveAsButton(
                         title: 'Home',
+                        isSelected: selectedLabel == 'Home',
+                        onPressed: () {
+                          setState(() {
+                            selectedLabel = 'Home';
+                            showOtherTextField = false;
+                          });
+                        },
                       ),
                       SaveAsButton(
                         title: 'Work',
+                        isSelected: selectedLabel == 'Work',
+                        onPressed: () {
+                          setState(() {
+                            selectedLabel = 'Work';
+                            showOtherTextField = false;
+                          });
+                        },
                       ),
                       SaveAsButton(
                         title: 'Other',
+                        isSelected: selectedLabel == 'Other',
+                        onPressed: () {
+                          setState(() {
+                            selectedLabel = 'Other';
+                            showOtherTextField = true;
+                          });
+                        },
                       ),
+                      const SizedBox(
+                        height: 10,
+                      )
                     ],
                   ),
                 ),
-                const SizedBox(height: 30),
+                // const SizedBox(height: 30),
+                Visibility(
+                  visible: showOtherTextField,
+                  child: ReuseTextField(
+                      controller: emptyController,
+                      labelText: "",
+                      placeholder: "Please Specify",
+                      isPasswordTextField: false),
+                ),
               ],
             ),
           ),
@@ -136,8 +183,8 @@ class AddNewAddress extends StatelessWidget {
         color: nuetralBck,
         child: Padding(
           padding: const EdgeInsets.all(15),
-          child: GestureDetector(
-            onTap: () {},
+          child: InkWell(
+            onTap: () => storeAddData(),
             child: Container(
               decoration: const BoxDecoration(
                 color: mainBckgrnd,
@@ -158,61 +205,48 @@ class AddNewAddress extends StatelessWidget {
           ),
         ),
       ),
-   
     );
   }
-}
 
-class SaveAsButton extends StatelessWidget {
-  const SaveAsButton({
-    super.key,
-    required this.title,
-  });
-
-  final String title;
-
-  @override
-  Widget build(
-    BuildContext context,
-  ) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 15),
-      child: TextButton(
-          onPressed: () {},
-          style: ButtonStyle(
-            shape: MaterialStateProperty.resolveWith((states) =>
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                    side: const BorderSide(color: mainBckgrnd, width: 1))),
-            backgroundColor: getColor(Colors.transparent, mainBckgrnd),
-            // elevation: 0,
-            // backgroundColor: nuetralBck,
-            // shape: RoundedRectangleBorder(
-            //   borderRadius: BorderRadius.circular(25),
-            //   side: const BorderSide(
-            //       color: mainBckgrnd, width: 1),
-            // ),
-          ),
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-              color: mainBckgrnd,
-            ),
-          )),
+  void storeAddData() async {
+    final ap = Provider.of<AuthProvider>(context, listen: false);
+    // final userModel = Provider.of<UserModel>(context, listen: false);
+    final addprovider = Provider.of<AddressProvider>(context, listen: false);
+    UserModel userModel = await ap.getDataFromFirestore();
+    Address address = Address(
+      label: selectedLabel,
+      houseNo: houseNoController.text.trim(),
+      floorNo: floorNoController.text.trim(),
+      address1: addressline1Controller.text.trim(),
+      address2: addressline2Controller.text.trim(),
+      landmark: landmarkController.text.trim(),
     );
-  }
-}
+    if (houseNoController.text.trim().isNotEmpty &&
+        floorNoController.text.trim().isNotEmpty &&
+        selectedLabel.isNotEmpty &&
+        addressline1Controller.text.trim().isNotEmpty) {
 
-MaterialStateProperty<Color> getColor(Color color, Color colorPressed) {
-  getColor(Set<MaterialState> states) {
-    if (states.contains(MaterialState.pressed)) {
-      return colorPressed;
-    } else {
-      return color;
+      userModel?.addresses ??= [];
+
+      userModel!.addresses!.add(address);
+
+      // if (userModel.addresses == null) {
+      //   userModel.addresses = []; // Initialize with an empty list if null
+      // }
+      // List updatedAddress = List.from(userModel.addresses as Iterable)
+      //   ..add(address);
+      // userModel.addresses = updatedAddress;
+
+      addprovider.addAddress(
+        userModel: userModel,
+        address: address,
+        context: context,
+      );
+
+      Navigator.pushNamedAndRemoveUntil(context, '/btmNav', (route) => false);
+
+      showSnackBar(context, 'Address Added Successfuly');
     }
   }
 
-  return MaterialStateProperty.resolveWith(getColor);
 }

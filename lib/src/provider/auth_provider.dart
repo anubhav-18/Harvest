@@ -108,22 +108,22 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<bool> checkUserAddress(BuildContext context) async {
-    final userDoc = await _firebaseFirestore
-        .collection('users')
-        .doc(_firebaseAuth.currentUser!.uid)
-        .get();
-    if (userDoc.exists) {
-      final userAddress = userDoc.data()?['address'];
-      if (userAddress == null || userAddress.isEmpty) {
-        return false;
-      } else {
-        return true;
-      }
-    } else {
-      return false;
-    }
-  }
+  // Future<bool> checkUserAddress(BuildContext context) async {
+  //   final userDoc = await _firebaseFirestore
+  //       .collection('users')
+  //       .doc(_firebaseAuth.currentUser!.uid)
+  //       .get();
+  //   if (userDoc.exists) {
+  //     final userAddress = userDoc.data()?['address'];
+  //     if (userAddress == null || userAddress.isEmpty) {
+  //       return false;
+  //     } else {
+  //       return true;
+  //     }
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
   void saveUserDataToFirebase({
     required BuildContext context,
@@ -168,6 +168,7 @@ class AuthProvider extends ChangeNotifier {
         email: snapshot['email'],
         phoneNo: snapshot['phoneNo'],
         createdAt: snapshot['createdAt'],
+        // addresses: snapshot['addresses'],
       );
       _uid = userModel.uid;
     });
@@ -225,7 +226,7 @@ class AuthProvider extends ChangeNotifier {
       print('Data is Updated');
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message.toString());
-      print("Data is Not Upadted");
+      print("Data is Not Updated");
       _isLoading = false;
       notifyListeners();
     }

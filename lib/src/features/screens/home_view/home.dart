@@ -13,12 +13,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isExtended = false;
 
-  // void _switchActionBar() {
-  //   setState(() {
-  //     isExtended = !isExtended;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

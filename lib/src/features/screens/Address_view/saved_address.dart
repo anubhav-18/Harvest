@@ -55,84 +55,86 @@ class _SavedAddressState extends State<SavedAddress> {
             ),
             Expanded(
               child: ListView.separated(
-                  itemCount: titleAddress.length,
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(
-                      height: 20,
-                    );
-                  },
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      minVerticalPadding: -5,
-                      shape: RoundedRectangleBorder(
-                          side: BorderSide(
-                              width: 1, color: textIcons.withOpacity(0.5)),
-                          borderRadius: BorderRadius.circular(20)),
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                titleAddress[index],
-                                style: const TextStyle(
-                                  fontSize: 17,
-                                  fontFamily: 'ADLaMDisplay',
+                itemCount: titleAddress.length,
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    height: 20,
+                  );
+                },
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    minVerticalPadding: -5,
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            width: 1, color: textIcons.withOpacity(0.5)),
+                        borderRadius: BorderRadius.circular(20)),
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              titleAddress[index],
+                              style: const TextStyle(
+                                fontSize: 17,
+                                fontFamily: 'ADLaMDisplay',
+                              ),
+                            ),
+                            const Spacer(),
+                            PopupMenuButton(
+                              elevation: 4,
+                              shape: RoundedRectangleBorder(
+                                  side: const BorderSide(
+                                      width: 1, color: nuetralBck),
+                                  borderRadius: BorderRadius.circular(8)),
+                              itemBuilder: (BuildContext context) => [
+                                popMenuItemsList('Edit', Icons.edit),
+                                popMenuItemsList('Delete', Icons.delete)
+                              ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: RichText(
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.start,
+                                textDirection: TextDirection.ltr,
+                                softWrap: true,
+                                maxLines: 3,
+                                text: TextSpan(
+                                  text: fullAddress[index],
+                                  style: const TextStyle(
+                                    // fontWeight: FontWeight.bold,
+                                    fontSize: 12,
+                                    color: textIcons,
+                                  ),
                                 ),
                               ),
-                              const Spacer(),
-                              PopupMenuButton(
-                                  elevation: 4,
-                                  shape: RoundedRectangleBorder(
-                                      side: const BorderSide(
-                                          width: 1, color: nuetralBck),
-                                      borderRadius: BorderRadius.circular(8)),
-                                  itemBuilder: (BuildContext context) => [
-                                        popMenuItemsList('Edit', Icons.edit),
-                                        popMenuItemsList('Delete', Icons.delete)
-                                      ]),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: RichText(
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.start,
-                                    textDirection: TextDirection.ltr,
-                                    softWrap: true,
-                                    maxLines: 3,
-                                    textScaleFactor: 1,
-                                    text: TextSpan(
-                                      text: fullAddress[index],
-                                      style: const TextStyle(
-                                        // fontWeight: FontWeight.bold,
-                                        fontSize: 12,
-                                        color: textIcons,
-                                      ),
-                                    )),
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.10,
-                              ),
-                            ],
-                          ),
-                          Text(
-                            ('Phone: ${phoneAddress[index]}'),
-                            style: const TextStyle(
-                              // fontFamily: 'ADLaMDisplay',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                              color: textIcons,
                             ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.10,
+                            ),
+                          ],
+                        ),
+                        Text(
+                          ('Phone: ${phoneAddress[index]}'),
+                          style: const TextStyle(
+                            // fontFamily: 'ADLaMDisplay',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                            color: textIcons,
                           ),
-                          const SizedBox(
-                            height: 15,
-                          )
-                        ],
-                      ),
-                    );
-                  }),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
